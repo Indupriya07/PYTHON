@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Interior Design</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #80a264;
+            color: rgb(0, 0, 0);
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 20px;
+            background: rgb(212, 245, 182);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            text-align: center;
+            color: #333;
+        }
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .image-card {
+            width: 30%;
+            text-align: center;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .image-card img {
+            width: 70%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .image-card p {
+            font-weight: bold;
+            margin-top: 5px;
+            color: #d43f52;
+        }
+        .partners, .offers, .estimator {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .signup-link {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .signup-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 7px;
+            width: 300px;
+            text-align: center;
+        }
+        .signup-form input, .signup-form button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .signup-form button {
+            background-color: #d43f52;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+.logo {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* Adds spacing between links */
+}
+
+.nav-link, .signup-link {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+ </style>
+</head>
+<body>
+    <div class="navbar">
+        <span class="logo">Home Interior Design</span>
+        <div class="nav-links">
+            <a href="cart.html" class="nav-link">Cart</a>
+            <a href="templates/account.html" class="nav-link">Account</a>
+            <a href="#" id="signup-link" class="signup-link" onclick="openSignup()">Sign Up</a>
+        </div>
+    </div>
+
+    <div class="signup-form" id="signupForm">
+        <span class="close-btn" onclick="closeSignup()">&times;</span>
+        <h2>Designs for Every Budget</h2>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Name">
+        <p id="nameError" style="color: red; display: none;">Please enter a valid name (only alphabets)</p>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" placeholder="Phone number">
+        <p id="phoneError" style="color: red; display: none;">Phone number must be exactly 10 digits</p>
+
+        <label><input type="checkbox"> Send me updates on WhatsApp</label>
+        <button onclick="submitSignup()">Next</button>
+        <p>By submitting this form, you agree to the <a href="privacy.html" target="_blank">privacy policy & terms and conditions</a></p>
+    </div>
+
+    <script>
+        function openSignup() {
+            document.getElementById("signupForm").style.display = "block";
+        }
+
+        function closeSignup() {
+            document.getElementById("signupForm").style.display = "none";
+        }
+
+        async function submitSignup() {
+            let name = document.getElementById("name").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let sendWhatsapp = document.querySelector('input[type="checkbox"]').checked;
+
+            let nameError = document.getElementById("nameError");
+            let phoneError = document.getElementById("phoneError");
+
+            let namePattern = /^[A-Za-z\s]+$/;
+            let phonePattern = /^\d{10}$/;
+            let isValid = true;
+
+            if (!namePattern.test(name)) {
+                nameError.style.display = "block";
+                isValid = false;
+            } else {
+                nameError.style.display = "none";
+            }
+
+            if (!phonePattern.test(phone)) {
+                phoneError.style.display = "block";
+                isValid = false;
+            } else {
+                phoneError.style.display = "none";
+            }
+
+            if (isValid) {
+                if (sendWhatsapp) {
+                    try {
+                        let response = await fetch("http://127.0.0.1:5000/send-otp", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ phone: phone })
+                        });
+
+                        let result = await response.json();
+                        if (result.status === 'success') {
+                            alert("OTP sent via WhatsApp!");
+                        } else {
+                            alert("Failed to send OTP: " + result.message);
+                        }
+                    } catch (error) {
+                        alert("Error: " + error.message);
+                    }
+                }
+
+                alert("Signup successful!");
+                sessionStorage.setItem("username", name);
+                updateUserLink(name);
+
+                closeSignup();
+            } else {
+                alert("Please correct the highlighted fields.");
+            }
+        }
+
+        function updateUserLink(name) {
+            const signupLink = document.getElementById("signup-link");
+            if (signupLink) {
+                signupLink.textContent = `Hi, ${name}`;
+                signupLink.removeAttribute("onclick");
+                signupLink.style.cursor = "default";
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const storedName = sessionStorage.getItem("username");
+            if (storedName) {
+                updateUserLink(storedName);
+            }
+        });
+    </script>
+    
+    
+     <div class="section">
+        <img src="images/log-img.jpg" alt="login image" width="1550" height="745">
+        <h2>Why Choose Us?</h2>
+        <div class="offers">
+            <p>✔ 10-Year Warranty</p>
+            <p>✔ 45 Days Move-in Guarantee</p>
+            <p>✔ No Hidden Costs</p>
+        </div>
+    </div>
+            <div class="images">
+                <div class="image-card" onclick="openPage('2&3bhk.html')">
+                    <img src="images/2bhk.jpg" alt="2BHK">
+                    <p>2BHK/3BHK/4BKH - Starting at 4.57L</p>
+                </div>
+                <div class="image-card" onclick="openPage('modular-Kitch.html')">
+                    <img src="images/3bhk.jpg" alt="3BHK">
+                    <p>Modular-Kitchen - Starting at 4.23L</p>
+                </div>
+                <div class="image-card" onclick="openPage('bedroom-inter.html')">
+                    <img src="images/4bhk.jfif" alt="4BHK">
+                    <p>Bedroom-Interior - Starting at 3.81L</p>
+                </div>
+                <div class="image-card" onclick="openPage('bathroom.html')">
+                    <img src="images/kitchen.jfif" alt="Modular Kitchen">
+                    <p>Bathroom-Interior - Starting at 1.00L</p>
+                </div>
+                <div class="image-card" onclick="openPage('lights&furnit.html')">
+                    <img src="images/bedroom.jpg" alt="Bedroom">
+                    <p>Lights & Furnitures - Starting at 25-k</p>
+                </div>
+                <div class="image-card" onclick="openPage('wallpaints.html')">
+                    <img src="images/wallpaints.jpg" alt="Bedroom">
+                    <p>WALLPAINTS - Starting at 25-k</p>
+                </div>
+                <div class="image-card" onclick="openPage('homedecor.html')">
+                    <img src="images/decor.jpg" alt="Bedroom">
+                    <p>Home-decores- Starting at 1-k</p>
+                </div>
+                <div class="image-card" onclick="openPage('theater.html')">
+                    <img src="images/theater.jpg" alt="Bedroom">
+                    <p>Home-Theater - Starting at 5-k</p>
+                </div>
+                <div class="image-card" onclick="openPage('balcony.html')">
+                    <img src="images/balcony.jpg" alt="Bedroom">
+                    <p>Balcony and Outdoor gardens - Starting at 15-k</p>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div class="section">
+            <h2>What We Offer</h2>
+            <div class="offers">
+                <p>✅ Modular Kitchens</p>
+                <p>✅ Modular Wardrobes</p>
+                <p>✅ Lighting, Flooring & Electrical Work</p>
+                <p>✅ Civil Work & False Ceiling</p>
+                <p>✅ Hidden rooms</p>
+                <p>✅ Price benefits</p>
+                <p>✅ Interior works</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Estimate Your Cost</h2>
+            <div class="estimator">
+                <label for="property-type">Select Property:</label>
+                <select id="property-type">
+                    <option value="home">Full Home</option>
+                    <option value="kitchen">Modular Kitchen</option>
+                    <option value="wardrobe">Wardrobe</option>
+                    <option value="2bhk">2BHK</option>
+                    <option value="3bhk">3BHK</option>
+                    <option value="Bathroom">Bathroom</option>
+                    <option value="Bedroom">Bed-room</option>
+                    <option value="Balcony">Balcony</option>
+                </select>
+                <label for="size">Enter Size (sqft):</label>
+                <input type="number" id="size" placeholder="e.g., 1000">
+                <button onclick="calculateCost()">Estimate</button>
+                <p id="estimate-result"></p>
+                
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Our Trusted Partners</h2>
+            <div class="partners">
+                <p>BOSCH | Siemens | Century Ply | Jaquar | Saint-Gobain  | Asian Paints | Berger Paints</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPage(page) {
+            window.location.href = page;
+        }
+
+        function calculateCost() {
+            let type = document.getElementById("property-type").value;
+            let size = document.getElementById("size").value;
+            let costPerSqFt = 0;
+
+            if (type === "home") costPerSqFt = 1500;
+            if (type === "kitchen") costPerSqFt = 2000;
+            if (type === "wardrobe") costPerSqFt = 600;
+            if (type === "2bhk") costPerSqFt = 1200;
+            if (type === "3bhk") costPerSqFt = 2000;
+            if (type === "Bedroom") costPerSqFt = 200;
+            if (type === "Bathroom") costPerSqFt = 500;
+            if (type === "Balcony") costPerSqFt = 100;
+
+            if (size) {
+                let totalCost = size * costPerSqFt;
+                document.getElementById("estimate-result").innerText = "Estimated Cost: ₹" + totalCost.toLocaleString();
+            } else {
+                document.getElementById("estimate-result").innerText = "Please enter a valid size.";
+            }
+        }
+
+    </script>
+
+<!-- Home Interiors Footer -->
+<footer style="background-color: #ccc; padding: 40px 20px; font-family: sans-serif;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: auto; color: #2e7d32;">
+      
+      <!-- Column 1 -->
+      <div style="flex: 1 1 200px; margin: 10px;">
+        <h4>Shop</h4>
+        <ul style="list-style: none; padding: 0; line-height: 1.8;">
+          <li><a href="#" style="color: inherit; text-decoration: none;">Best Sellers</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Shop by Color</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Shop by Price</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Shop by Occasion</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">About Us</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Reviews</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Contact Us</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 2 -->
+      <div style="flex: 1 1 200px; margin: 10px;">
+        <h4>SIGN UP NOW</h4>
+        <p style="line-height: 1.5;">Subscribe to be the first to be notified about new designs, special offers, free giveaways, and once-in-a-lifetime deals.</p>
+        <form style="margin: 10px 0;">
+          <input type="email" placeholder="Enter your email" style="padding: 6px; width: 80%; border: none; border-bottom: 2px solid #2e7d32;">
+          <button type="submit" style="background: none; border: none;">
+            <img src="https://img.icons8.com/ios-filled/20/2e7d32/sent.png"/>
+          </button>
+        </form>
+        <div style="margin-top: 10px;">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/2e7d32/instagram-new.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/2e7d32/facebook-new.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/2e7d32/youtube-play.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/2e7d32/linkedin.png"/></a>
+        </div>
+      </div>
+  
+      <!-- Column 3 -->
+      <div style="flex: 1 1 200px; margin: 10px;">
+        <h4>Support</h4>
+        <ul style="list-style: none; padding: 0; line-height: 1.8;">
+          <li><a href="#" style="color: inherit; text-decoration: none;">Stores</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Shipping Policy</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Returns & Exchanges</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Refund Policy</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Blog</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Become an Affiliate</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Cancellation Policy</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Sell on Home Interiors</a></li>
+          <li><a href="#" style="color: inherit; text-decoration: none;">Careers</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 4 -->
+      <div style="flex: 1 1 250px; margin: 10px;">
+        <h4 style="color: #2e7d32;">Visit Our Store</h4>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.1475351334595!2d77.6079461150961!3d12.92677069088244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1581f8dbe121%3A0x5be21b82bb52c354!2sTavarekere%2C%20Bengaluru%2C%20Karnataka%20560029!5e0!3m2!1sen!2sin!4v1646249092123!5m2!1sen!2sin"
+          width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+        <div style="margin-top: 10px; display: flex; align-items: center;">
+          <img src="https://img.icons8.com/ios-filled/50/2e7d32/home.png" alt="Home Icon" style="max-width: 40px; margin-right: 10px;">
+          <span style="font-size: 20px; font-weight: bold;">Home Interiors</span>
+        </div>
+      </div>
+    </div>
+  
+    <div style="text-align: center; padding: 10px; font-size: 14px; color: #888;">
+      &copy; 2025 Home Interiors. All rights reserved.
+    </div>
+  </footer>
+  
+</body>
+</html>

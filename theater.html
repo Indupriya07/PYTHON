@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theater Interior Designs</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5eded; margin: 0; padding: 0; }
+        .navbar { background-color: #f7ffcf; color: black; padding: 15px; text-align: center; font-size: 24px; font-weight: bold; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; padding: 20px; }
+        .grid-item { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center; cursor: pointer; }
+        .grid-item img { width: 100%; border-radius: 8px; }
+        .details { font-size: 16px; margin-top: 5px; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
+        .overlay-content { background: white; padding: 20px; border-radius: 8px; text-align: center; position: relative; max-width: 90%; }
+        .overlay img { width: 100%; border-radius: 8px; }
+        .close-btn { position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px; }
+        .buttons { margin-top: 10px; }
+        .buttons button { margin: 5px; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
+        .like { background: red; color: white; }
+        .share { background: blue; color: white; }
+        .save { background: green; color: white; }
+        .book { background: orange; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">HOME THEATER </div>
+    
+    <div class="grid-container">
+        <div class="grid-item" onclick="openOverlay('images/the1.jpg', '₹3.50L', '45 Days')">
+            <img src="images/the1.jpg" alt="2BHK Design">
+            <div class="details">₹3.50L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the2.jpg', '₹3.55L', '45 Days')">
+            <img src="images/the2.jpg" alt="2BHK Design">
+            <div class="details">₹3.55L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the3.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the3.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the4.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the4.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the5.jpg', '₹6.57L', '45 Days')">
+            <img src="images/the5.jpg" alt="2BHK Design">
+            <div class="details">₹6.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the6.jpg', '₹2.57L', '45 Days')">
+            <img src="images/the6.jpg" alt="2BHK Design">
+            <div class="details">₹2.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the7.jpgg', '₹2.27L', '45 Days')">
+            <img src="images/the7.jpg" alt="2BHK Design">
+            <div class="details">2.25L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the8.jpg', '₹2.50L', '45 Days')">
+            <img src="images/the8.jpg" alt="2BHK Design">
+            <div class="details">₹2.50L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the9.jpg', '₹3.90L', '45 Days')">
+            <img src="images/the9.jpg" alt="2BHK Design">
+            <div class="details">₹3.90L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the10.jpg', '₹1.57L', '45 Days')">
+            <img src="images/the10.jpg" alt="2BHK Design">
+            <div class="details">₹1.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the11.jpg', '₹2.00L', '45 Days')">
+            <img src="images/the11.jpg" alt="2BHK Design">
+            <div class="details">₹2.00L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the12.jpg', '₹2.80L', '45 Days')">
+            <img src="images/the12.jpg" alt="2BHK Design">
+            <div class="details">₹2.80L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('2images/the13.jpg', '₹2.00L', '45 Days')">
+            <img src="images/the13.jpg" alt="2BHK Design">
+            <div class="details">₹2.00L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the14.jpg', '₹4.55L', '45 Days')">
+            <img src="images/the14.jpg" alt="2BHK Design">
+            <div class="details">₹4.55L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the15.jpg', '₹3.30L', '45 Days')">
+            <img src="images/the15.jpg" alt="2BHK Design">
+            <div class="details">₹3.30L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the16.jpg', '₹3.40L', '45 Days')">
+            <img src="images/the16.jpg" alt="2BHK Design">
+            <div class="details">₹3.40L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the17.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the17.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the18.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the18.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the19.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the19.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the20.jpg', '₹6.57L', '45 Days')">
+            <img src="images/the20.jpg" alt="2BHK Design">
+            <div class="details">₹6.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the21.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the21.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the22.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the22.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the23.jpg', '₹2.57L', '45 Days')">
+            <img src="images/the23.jpg" alt="2BHK Design">
+            <div class="details">₹2.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the24.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the24.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the25.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the25.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the26.jpg', '₹1.57L', '45 Days')">
+            <img src="images/the26.jpg" alt="2BHK Design">
+            <div class="details">₹1.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the27.jpg', '₹2.57L', '45 Days')">
+            <img src="images/the27.jpg" alt="2BHK Design">
+            <div class="details">₹2.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the28.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the28.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the29.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the29.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the30.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the30.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the31.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the31.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the32.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the32.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the33.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the33.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the34.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the34.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the35.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the35.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the36.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the36.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the37.jpg', '₹6.57L', '45 Days')">
+            <img src="images/the37.jpg" alt="2BHK Design">
+            <div class="details">₹6.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the38.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the38.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the39.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the39.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the40.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the40.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the41.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the41.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the42.jpg', '₹3.57L', '45 Days')">
+            <img src="images/the42.jpg" alt="2BHK Design">
+            <div class="details">₹3.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the43.jpg', '₹2.57L', '45 Days')">
+            <img src="images/the43.jpg" alt="2BHK Design">
+            <div class="details">₹2.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the44.jpg', '₹4.57L', '45 Days')">
+            <img src="images/the44.jpg" alt="2BHK Design">
+            <div class="details">₹4.57L | 45 Days</div>
+        </div>
+        <div class="grid-item" onclick="openOverlay('images/the45.jpg', '₹5.57L', '45 Days')">
+            <img src="images/the45.jpg" alt="2BHK Design">
+            <div class="details">₹5.57L | 45 Days</div>
+        </div>
+        <!-- Repeat similar divs for 20 images -->
+    </div>
+    
+    <div class="overlay" id="imageOverlay">
+        <div class="overlay-content">
+            <span class="close-btn" onclick="closeOverlay()">&times;</span>
+            <img id="overlayImg">
+            <div class="details" id="overlayDetails"></div>
+            <div class="buttons">
+                <button onclick="increaseLike()">Like ❤️ (<span id="likeCount">0</span>)</button>
+                <button onclick="showShare()">🔗 Share</button>
+                <div id="share" style="display: none; display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+
+                    <a href="https://wa.me/?text=Check this out!" target="_blank">
+                        <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WhatsApp" style="width: 30px; height: 30px;">
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" style="width: 30px; height: 30px;">
+                    </a>
+                    <a href="mailto:?subject=Check this out!" target="_blank">
+                        <img src="https://img.icons8.com/color/48/gmail-new.png" alt="Gmail" style="width: 30px; height: 30px;">
+                    </a>
+                    
+                </div>
+                <button onclick="saveImage()">Save 💾</button>
+                <img id="savedIcon" src="https://img.icons8.com/ios-filled/50/bookmark-ribbon.png" style="display: none; width: 24px; margin-left: 10px;" />
+                <button class="book" onclick="showBookingForm()">📅 Book Now</button>
+            </div>
+    
+            <div id="bookingForm">
+                <h3>Book Your Interior Design</h3>
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="date" id="date" placeholder="Preferred Date">
+                <textarea id="address" placeholder="Your Address"></textarea>
+                <button onclick="submitBooking()">Submit Booking</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+          function toggleLike(button, imageUrl) {
+       let heart = button.querySelector(".heart");
+       let liked = heart.innerText === "❤️";
+
+           // Toggle heart icon
+          heart.innerText = liked ? "🤍" : "❤️";
+
+        // Send to server
+         fetch('/like-image', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            image: imageUrl,
+            liked: !liked
+        })
+     })
+     .then(res => res.json())
+     .then(data => {
+        console.log(data.message);
+        });
+     }
+
+        function showShare() {
+            const shareDiv = document.getElementById("share");
+            shareDiv.style.display = shareDiv.style.display === "block" ? "none" : "block";
+        }
+    
+        function saveImage() {
+            const currentImage = document.getElementById("overlayImg").src;
+            let savedImages = JSON.parse(localStorage.getItem("savedImages")) || [];
+            if (!savedImages.includes(currentImage)) {
+                savedImages.push(currentImage);
+                localStorage.setItem("savedImages", JSON.stringify(savedImages));
+                alert("Image saved!");
+            } else {
+                alert("Image already saved!");
+            }
+    
+            document.getElementById("savedIcon").style.display = "inline";
+        }
+    
+        function openOverlay(image, price, days) {
+            document.getElementById('overlayImg').src = image;
+            document.getElementById('overlayDetails').innerHTML = price + ' | ' + days;
+            document.getElementById('imageOverlay').style.display = 'flex';
+            document.getElementById('bookingForm').style.display = 'none';
+        }
+    
+        function closeOverlay() {
+            document.getElementById('imageOverlay').style.display = 'none';
+        }
+    
+        function showBookingForm() {
+            document.getElementById('bookingForm').style.display = 'block';
+        }
+    
+        function generateOrderID() {
+            const timestamp = Date.now();
+            return 'OD' + timestamp.toString().slice(-6); // Simple 6-digit order ID
+        }
+    
+        function submitBooking() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+            const address = document.getElementById('address').value;
+            const image = document.getElementById('overlayImg').src;
+            const details = document.getElementById('overlayDetails').innerText;
+    
+            if (!name || !phone || !email || !address) {
+                alert("Please fill all required fields.");
+                return;
+            }
+    
+            const orderId = generateOrderID();
+    
+            // For now, display a success message and QR (simulate QR for frontend)
+            const qrCodeURL = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=OrderID:${orderId}`;
+    
+            const resultHTML = `
+                <h4>✅ Booking Successful!</h4>
+                <p><strong>Order ID:</strong> ${orderId}</p>
+                <p><strong>Design:</strong> ${details}</p>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <img src="${qrCodeURL}" alt="QR Code for Payment" />
+                <p><em>Scan this QR to complete your payment.</em></p>
+            `;
+    
+            document.getElementById('bookingForm').innerHTML = resultHTML;
+    
+            // Optionally store in localStorage or send to backend via fetch()
+            const bookingData = {
+                orderId, name, phone, email, date, address, image, details
+            };
+    
+            fetch("/submit_order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(bookingData)
+            }).then(res => res.json())
+              .then(data => {
+                  console.log("Server response:", data);
+              });
+        }
+    </script>
+</body>
+</html>

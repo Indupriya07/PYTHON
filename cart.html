@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #f7ffcf;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .cart-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+    .cart-item img {
+      width: 120px;
+      height: auto;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+    .cart-details {
+      flex: 1;
+    }
+    .cart-details h4 {
+      margin: 0 0 10px;
+    }
+    .qty-btns {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+    .qty-btns button {
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      border: none;
+      background-color: #f7ffcf;
+      border-radius: 5px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+    .remove-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .total-section {
+      text-align: right;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+    .checkout-btn {
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      float: right;
+      margin-top: 10px;
+    }
+    .empty {
+      text-align: center;
+      font-size: 20px;
+      margin: 50px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">🛒 Your Cart</div>
+
+  <div class="cart-container" id="cartContainer"></div>
+
+  <script>
+    function loadCart() {
+      const cartContainer = document.getElementById("cartContainer");
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (cartItems.length === 0) {
+        cartContainer.innerHTML = '<div class="empty">Your cart is empty.</div>';
+        return;
+      }
+
+      let total = 0;
+      cartContainer.innerHTML = "";
+
+      cartItems.forEach((item, index) => {
+        const price = parseFloat(item.price.replace(/[^\d]/g, '')) || 0;
+        const qty = item.quantity || 1;
+        total += price * qty;
+
+        const cartItem = document.createElement("div");
+        cartItem.className = "cart-item";
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="Image" />
+          <div class="cart-details">
+            <h4>${item.price} | ${item.days}</h4>
+            <div class="qty-btns">
+              <button onclick="updateQty(${index}, -1)">-</button>
+              <span>${qty}</span>
+              <button onclick="updateQty(${index}, 1)">+</button>
+            </div>
+            <br>
+            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+        cartContainer.appendChild(cartItem);
+      });
+
+      const totalSection = document.createElement("div");
+      totalSection.className = "total-section";
+      totalSection.innerHTML = `
+        <strong>Total: ₹${total.toFixed(2)}</strong>
+        <br><button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+      `;
+      cartContainer.appendChild(totalSection);
+    }
+
+    function removeItem(index) {
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      cartItems.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      loadCart();
+    }
+
+    function updateQty(index, change) {
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      if (!cartItems[index].quantity) cartItems[index].quantity = 1;
+      cartItems[index].quantity += change;
+      if (cartItems[index].quantity < 1) cartItems[index].quantity = 1;
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      loadCart();
+    }
+
+    function checkout() {
+      alert("Checkout is under construction. Stay tuned!");
+    }
+
+    window.onload = loadCart;
+  </script>
+
+</body>
+</html>
